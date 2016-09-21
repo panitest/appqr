@@ -6,6 +6,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes"/>
 <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 <title>QR</title>
+<style>
+#btscan{ width:50px; height:50px; position:absolute; background: url(images/bt_scan.png) center center no-repeat; position:absolute; left:50%; top:50%; margin-left:-25px; margin-top:-25px;}
+#resultado{ width:100%; height:100px; text-align:center; font-family:Verdana, Geneva, sans-serif; font-size:16px; color:#000; position:absolute; left:0; top:50%; margin-top:-60px;}
+</style>
 <script type="text/javascript" src="phonegap.js"></script>
 <script type="text/javascript" src="js/panino.js"></script>
 <script type="text/javascript" src="js/comunes.js"></script>
@@ -35,15 +39,39 @@ function inArray(needle, haystack) {
     }
     return false;
 }
+function save(){
+	request(
+				'http://onepesoday.com.ar/proceso2.php',
+				function(r){
+					$('resultado').innerHTML='Los datos han sido guardados<br><img onclick="scan()" src="images/bt_scan.png">';
+				},
+				{'proceso':'savedata','data':ns.data}
+		);
+}
 function scan(){
+	ns.data=0;
+	$('btscan').style.display='none';
+	$('resultado').style.display='block';
+	$('resultado').innerHTML='<img src="images/ajax-loader.gif">';
  console.log("clicked");
  cordova.plugins.barcodeScanner.scan(function(result){
- //success callback
- alert(JSON.stringify(result));
+ ns.data=result.text || 0;
+		request(
+				'http://onepesoday.com.ar/proceso2.php',
+				function(r){
+					r=r.trim();
+					if(r!='ko'){
+						$('resultado').innerHTML=r+'<br><img onclick="save()" src="images/bt_ok.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img onclick="scan()" src="images/bt_no.png">';
+					}else{
+						$('resultado').innerHTML='No se encontraron resultados<br><img onclick="scan()" src="images/bt_no.png">';
+					}
+				},
+				{'proceso':'verdata','data':ns.data}
+		);
 
  },function(error){
  //error callback
- alert(JSON.stringify(error));
+	$('resultado').innerHTML='No se encontraron resultados<br><img onclick="scan()" src="images/bt_no.png">';
 
  });
  }
@@ -54,7 +82,8 @@ function scan(){
 
 
 <div id="appcontainer">
-<button onclick="scan()">SCAN</button>
+<div id="btscan" onlick="scan()"></div>
+<div id="resultado"></div>
 </div>
 </body>
 </html>
