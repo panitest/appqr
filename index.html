@@ -7,8 +7,10 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 <title>QR</title>
 <style>
-#btscan{ width:50px; height:50px; position:absolute; background: url(images/bt_scan.png) center center no-repeat; position:absolute; left:50%; top:50%; margin-left:-25px; margin-top:-25px;}
-#resultado{ width:100%; height:100px; text-align:center; font-family:Verdana, Geneva, sans-serif; font-size:16px; color:#000; position:absolute; left:0; top:50%; margin-top:-60px;}
+html,body{ height:100%}
+#appcontainer{ position:relative; height:100%}
+#btscan{ width:50px; height:50px; position:absolute;cursor:pointer; z-index:500; left:50%; top:50%; margin-left:-25px; margin-top:-25px;}
+#resultado{ width:100%; height:100px; text-align:center; font-family:Verdana, Geneva, sans-serif; font-size:16px; color:#000; position:absolute; left:0; top:50%; margin-top:-60px; z-index:500}
 </style>
 <script type="text/javascript" src="phonegap.js"></script>
 <script type="text/javascript" src="js/panino.js"></script>
@@ -49,13 +51,14 @@ function save(){
 		);
 }
 function scan(){
+	alert(1);
 	ns.data=0;
 	$('btscan').style.display='none';
 	$('resultado').style.display='block';
 	$('resultado').innerHTML='<img src="images/ajax-loader.gif">';
- console.log("clicked");
+
  cordova.plugins.barcodeScanner.scan(function(result){
- ns.data=result.text || 0;
+ 		ns.data=result.text || 0;
 		request(
 				'http://onepesoday.com.ar/proceso2.php',
 				function(r){
@@ -82,7 +85,7 @@ function scan(){
 
 
 <div id="appcontainer">
-<div id="btscan" onclick="scan()"></div>
+<img id="btscan" src="images/bt_scan.png" onclick="scan();">
 <div id="resultado"></div>
 </div>
 </body>
