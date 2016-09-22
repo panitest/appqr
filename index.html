@@ -67,7 +67,7 @@ function scan(){
 						$('resultado').innerHTML=r+'<br><br><img ontouchstart="save()" src="images/bt_ok.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img ontouchstart="scan()" src="images/bt_no.png">';
 					}else if( r.indexOf('__()__()__')!=-1){
 						var r2=r.split('__()__()__').pop();
-						$('resultado').innerHTML=r+'<br>(ya ha sido guardado anteriormente)<br><br><img ontouchstart="scan()" src="images/bt_no.png">';
+						$('resultado').innerHTML=r2+'<br>(ya ha sido guardado anteriormente)<br><br><img ontouchstart="scan()" src="images/bt_no.png">';
 					}else{
 						$('resultado').innerHTML='No se encontraron resultados<br><br><img ontouchstart="scan()" src="images/bt_no.png">';
 					}
