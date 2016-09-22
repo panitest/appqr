@@ -64,9 +64,9 @@ function scan(){
 				function(r){
 					r=r.trim();
 					if(r!='ko'){
-						$('resultado').innerHTML=r+'<br><br><img onclick="save()" src="images/bt_ok.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img onclick="scan()" src="images/bt_no.png">';
+						$('resultado').innerHTML=r+'<br><br><img ontouchstart="save()" src="images/bt_ok.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img ontouchstart="scan()" src="images/bt_no.png">';
 					}else{
-						$('resultado').innerHTML='No se encontraron resultados<br><br><img onclick="scan()" src="images/bt_no.png">';
+						$('resultado').innerHTML='No se encontraron resultados<br><br><img ontouchstart="scan()" src="images/bt_no.png">';
 					}
 				},
 				{'proceso':'verdata','data':ns.data}
@@ -74,7 +74,7 @@ function scan(){
 
  },function(error){
  //error callback
-	$('resultado').innerHTML='No se encontraron resultados<br><br><img onclick="scan()" src="images/bt_no.png">';
+	$('resultado').innerHTML='No se encontraron resultados<br><br><img ontouchstart="scan()" src="images/bt_no.png">';
 
  });
  }
@@ -85,7 +85,7 @@ function scan(){
 
 
 <div id="appcontainer">
-<img id="btscan" src="images/bt_scan.png" onclick="scan();">
+<img id="btscan" src="images/bt_scan.png" ontouchstart="scan();">
 <div id="resultado"></div>
 </div>
 </body>
