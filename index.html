@@ -45,7 +45,8 @@ function save(){
 	request(
 				'http://onepesoday.com.ar/proceso2.php',
 				function(r){
-					$('resultado').innerHTML='Los datos han sido guardados<br><img onclick="scan()" src="images/bt_scan.png">';
+					$('resultado').innerHTML='Los datos han sido guardados';
+					setTimeout(scan,1500);
 				},
 				{'proceso':'savedata','data':ns.data}
 		);
