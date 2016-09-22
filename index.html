@@ -63,9 +63,9 @@ function scan(){
 				function(r){
 					r=r.trim();
 					if(r!='ko'){
-						$('resultado').innerHTML=r+'<br><img onclick="save()" src="images/bt_ok.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img onclick="scan()" src="images/bt_no.png">';
+						$('resultado').innerHTML=r+'<br><br><img onclick="save()" src="images/bt_ok.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img onclick="scan()" src="images/bt_no.png">';
 					}else{
-						$('resultado').innerHTML='No se encontraron resultados<br><img onclick="scan()" src="images/bt_no.png">';
+						$('resultado').innerHTML='No se encontraron resultados<br><br><img onclick="scan()" src="images/bt_no.png">';
 					}
 				},
 				{'proceso':'verdata','data':ns.data}
@@ -73,7 +73,7 @@ function scan(){
 
  },function(error){
  //error callback
-	$('resultado').innerHTML='No se encontraron resultados<br><img onclick="scan()" src="images/bt_no.png">';
+	$('resultado').innerHTML='No se encontraron resultados<br><br><img onclick="scan()" src="images/bt_no.png">';
 
  });
  }
