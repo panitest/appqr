@@ -63,8 +63,11 @@ function scan(){
 				'http://onepesoday.com.ar/proceso2.php',
 				function(r){
 					r=r.trim();
-					if(r!='ko'){
+					if(r!='ko' && r.indexOf('__()__()__')==-1){
 						$('resultado').innerHTML=r+'<br><br><img ontouchstart="save()" src="images/bt_ok.png">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img ontouchstart="scan()" src="images/bt_no.png">';
+					}else if( r.indexOf('__()__()__')!=-1){
+						var r2=r.split('__()__()__').pop();
+						$('resultado').innerHTML=r+'<br>(ya ha sido guardado anteriormente)<br><br><img ontouchstart="scan()" src="images/bt_no.png">';
 					}else{
 						$('resultado').innerHTML='No se encontraron resultados<br><br><img ontouchstart="scan()" src="images/bt_no.png">';
 					}
